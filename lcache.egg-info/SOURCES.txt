@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+lcache/__init__.py
+lcache/cache.py
+lcache/disk.py
+lcache/lru.py
+lcache.egg-info/PKG-INFO
+lcache.egg-info/SOURCES.txt
+lcache.egg-info/dependency_links.txt
+lcache.egg-info/requires.txt
+lcache.egg-info/top_level.txt

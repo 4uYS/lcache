@@ -1,0 +1,54 @@
+# lcache
+
+轻量级缓存装饰器库，内置 LRU + 磁盘持久化。零依赖。
+
+## 特性
+
+- **LRU 内存缓存**：固定容量，自动淘汰最久未使用条目
+- **磁盘持久化**：可选，进程重启后缓存不丢失
+- **TTL 过期**：条目自动过期清理
+- **装饰器模式**：一行代码启用缓存
+- **零依赖**：仅使用 Python 标准库
+
+## 安装
+
+```bash
+pip install lcache
+```
+
+## 快速开始
+
+```python
+from lcache import cached
+
+@cached(ttl=300, maxsize=128)
+def fetch_user(user_id: int) -> dict:
+    # 第一次调用执行函数，后续调用直接返回缓存
+    return {"id": user_id, "name": "Alice"}
+
+result = fetch_user(1)  # 执行函数
+result = fetch_user(1)  # 返回缓存
+```
+
+### 磁盘持久化
+
+```python
+@cached(ttl=3600, persist_dir="/tmp/my_cache")
+def expensive_query(sql: str) -> list:
+    return db.execute(sql)
+```
+
+### 手动管理缓存
+
+```python
+from lcache import Cache
+
+cache = Cache(maxsize=256, ttl=600, persist_dir="/tmp/cache")
+cache.set("key", value)
+value = cache.get("key")
+cache.clear()
+```
+
+## 许可证
+
+MIT
